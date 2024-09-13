@@ -3079,7 +3079,11 @@ bool TWPartition::Update_Size(bool Display_Error) {
 	if (Has_Data_Media) {
 		if (Mount(Display_Error)) {
 			Used = backup_exclusions.Get_Folder_Size(Mount_Point);
+			// Log the raw size in bytes before conversion
+        	LOGINFO("Raw Used size (in bytes): %llu\n", Used);
 			Backup_Size = Used;
+			// Log the raw backup size in bytes before conversion
+        	LOGINFO("Raw Backup size (in bytes): %llu\n", Backup_Size);
 			int bak = (int)(Used / 1048576LLU);
 			int fre = (int)(Free / 1048576LLU);
 			LOGINFO("Data backup size is %iMB, free: %iMB.\n", bak, fre);
